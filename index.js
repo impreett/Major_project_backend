@@ -10,7 +10,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const mongoUrl ="mongodb://localhost:27017/PoliceData";
+const mongoUrl =
+    process.env.CONNECTION_STRING ||
+    process.env.MONGODB_URL ||
+    "mongodb://localhost:27017/PoliceData";
 
 mongoose.connect(mongoUrl)
     .then(() => console.log("MongoDB connected successfully!"))
