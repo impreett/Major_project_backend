@@ -1,6 +1,10 @@
 const nodemailer = require("nodemailer");
 
 const sendEmail = async (email, otp) => {
+  if (!process.env.EMAIL || !process.env.PASS) {
+    throw new Error("EMAIL/PASS not configured");
+  }
+
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
@@ -10,7 +14,7 @@ const sendEmail = async (email, otp) => {
   });
 
   await transporter.sendMail({
-    from: "PoliceData",
+    from: `PoliceData <${process.env.EMAIL}>`,
     to: email,
     subject: "Email verification OTP",
     html: `<table width="100%" border="0" cellspacing="0" cellpadding="0">

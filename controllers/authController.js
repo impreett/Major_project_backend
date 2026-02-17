@@ -64,7 +64,8 @@ exports.registerUser = async (req, res) => {
       message: "OTP sent to email. Please verify.",
     });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.error("registerUser error:", error);
+    res.status(500).json({ message: error.message || "Server error" });
   }
 };
 
@@ -107,7 +108,8 @@ exports.verifyOtp = async (req, res) => {
       message: "Email verified successfully",
     });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.error("verifyOtp error:", error);
+    res.status(500).json({ message: error.message || "Server error" });
   }
 };
 
@@ -132,6 +134,7 @@ exports.resendOtp = async (req, res) => {
       message: "OTP resent. Please verify.",
     });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.error("resendOtp error:", error);
+    res.status(500).json({ message: error.message || "Server error" });
   }
 };
