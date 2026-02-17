@@ -10,7 +10,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-mongoose.connect("mongodb://localhost:27017/PoliceData")
+mongoose.connect("mongodb+srv://pritchotaliya206gmailcom:123123123@cluster0.ylfbtmd.mongodb.net/?appName=Cluster0")
     .then(() => console.log("MongoDB connected successfully!"))
     .catch((err) => console.log("MongoDB connection failed:", err));
 
