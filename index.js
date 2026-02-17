@@ -7,11 +7,19 @@ const authRoutes = require("./routes/authRoutes");
 
 const app = express();
 
+// Enhanced CORS middleware
 app.use(cors({
-    origin: "*",
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: false
+    origin: function (origin, callback) {
+        callback(null, true);
+    },
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    credentials: false,
+    allowedHeaders: ["Content-Type", "Authorization"]
 }));
+
+// Handle preflight requests explicitly
+app.options("*", cors());
+
 app.use(express.json());
 
 const mongoUrl = process.env.CONNECTION_STRING || process.env.MONGODB_URL || "mongodb://localhost:27017/PoliceData";
